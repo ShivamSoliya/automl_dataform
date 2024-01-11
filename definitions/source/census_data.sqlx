@@ -1,0 +1,6 @@
+config {
+  type: "declaration",
+  schema: "census_adult_income_model",
+  name: "census_adult_income_view",
+  description: "A view on top of bq public dataset called census adult income. Please consider this view as a startline."
+}

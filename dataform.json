@@ -1,0 +1,8 @@
+{
+  "defaultSchema": "census_adult_income_model",
+  "assertionSchema": "dataform_assertions",
+  "warehouse": "bigquery",
+  "defaultDatabase": "erudite-skill-340005",
+  "defaultLocation": "US"
+}
+    

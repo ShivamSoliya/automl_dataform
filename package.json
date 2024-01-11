@@ -1,0 +1,6 @@
+{
+  "name": "census_adult_income_model",
+  "dependencies": {
+    "@dataform/core": "2.4.2"
+  }
+}

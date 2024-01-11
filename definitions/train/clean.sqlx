@@ -1,0 +1,13 @@
+config {
+  type: 'operations',
+  hasOutput: true,
+  tags: ["training", "predicting"]
+}
+
+CREATE OR REPLACE TABLE FUNCTION ${self()}(y INT64)
+AS (
+  SELECT year, name, SUM(number) AS total
+  FROM ${ref('census_data')}
+  WHERE year = y
+  GROUP BY year, name
+);
