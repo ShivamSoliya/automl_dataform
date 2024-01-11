@@ -1,0 +1,17 @@
+config {
+    type: 'operations',
+    hasOutput: true,
+    tags: ["training"]
+}
+
+CREATE OR REPLACE MODEL ${self()} OPTIONS (
+  model_type = 'AUTOML_CLASSIFIER',
+  budget_hours = 1.0
+  input_label_cols = ['income_bracket']
+) AS
+SELECT
+  *
+FROM
+  ${ref('census_data')}
+WHERE
+  dataframe = 'TRAIN'

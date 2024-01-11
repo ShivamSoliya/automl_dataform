@@ -1,6 +1,22 @@
 config {
-  type: "declaration",
-  schema: "census_adult_income_model",
-  name: "census_adult_income_view",
-  description: "A view on top of bq public dataset called census adult income. Please consider this view as a startline."
+  type: "view",
+  tags: "source_view"
 }
+
+SELECT
+  DISTINCT 
+    age,
+    education_num,
+    occupation,
+    workclass,
+    native_country,
+    sex,
+    hours_per_week,
+    income_bracket,
+    CASE
+      WHEN MOD(functional_weight, 10) < 8 THEN 'TRAIN'
+      WHEN MOD(functional_weight, 10) = 8 THEN 'VALIDATE'
+      WHEN MOD(functional_weight, 10) = 9 THEN 'TEST'
+    END AS data_split_column
+FROM
+  `erudite-skill-340005.census_adult_income_model.census_adult_income`
