@@ -1,10 +1,10 @@
 config {
-  type: 'assertion',
+  type: 'table',
   tags: ["evaluate"]
 }
 
 SELECT
-  *
+  *, CURRENT_TIMESTAMP() evaluation_timestamp
 FROM
   ML.EVALUATE (
     MODEL ${ref('model_train')},
@@ -14,6 +14,6 @@ FROM
       FROM
         ${ref('census_data')}
       WHERE
-        dataframe = 'VALIDATE'
+        data_split_column = 'VALIDATE'
     )
   )
