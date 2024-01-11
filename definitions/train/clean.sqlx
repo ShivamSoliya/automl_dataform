@@ -1,13 +1,20 @@
 config {
-  type: 'operations',
-  hasOutput: true,
-  tags: ["training", "predicting"]
+    type: 'operations',
+    hasOutput: true,
+    tags: ["training", "predicting"]
 }
 
-CREATE OR REPLACE TABLE FUNCTION ${self()}(y INT64)
-AS (
-  SELECT year, name, SUM(number) AS total
-  FROM ${ref('census_data')}
-  WHERE year = y
-  GROUP BY year, name
-);
+SELECT
+  DISTINCT 
+    age,
+    education_num,
+    occupation,
+    workclass,
+    native_country,
+    sex,
+    hours_per_week,
+    income_bracket,
+    CASE WHEN occupation IS NULL THEN 1 ELSE 0 END AS occupation_missing,
+    CASE WHEN workclass IS NULL THEN 1 ELSE 0 END AS workclass_missing,
+    CASE WHEN native_country IS NULL THEN 1 ELSE 0 END AS native_country_missing,
+  FROM ${R}
