@@ -14,6 +14,6 @@ FROM
       FROM
         ${ref('census_data')}
       WHERE
-        dataframe = 'TEST'
+        data_split_column IN ('TEST', 'LIVE')
     )
   )
